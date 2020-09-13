@@ -14,31 +14,19 @@
 # $package_name
 #
 class logwatch (
-  $output         = $logwatch::params::output,
-  $format         = $logwatch::params::format,
-  $mail_to        = $logwatch::params::mail_to,
-  $mail_from      = $logwatch::params::mail_from,
-  $range          = $logwatch::params::range,
-  $detail         = $logwatch::params::detail,
-  $service        = $logwatch::params::service,
-  $package_ensure = $logwatch::params::package_ensure,
-  $package_name   = $logwatch::params::package_name,
-  $ignore_conf    = $logwatch::params::ignore_conf,
+  Enum['stdout','file','mail','unformatted'] $output         = $logwatch::params::output,
+  Enum['text','html']                        $format         = $logwatch::params::format,
+  Array[String[1]]                           $mail_to        = $logwatch::params::mail_to,
+  String[1]                                  $mail_from      = $logwatch::params::mail_from,
+  Enum['All','Today','Yesterday']            $range          = $logwatch::params::range,
+  Enum['Low','Med','High']                   $detail         = $logwatch::params::detail,
+  Array[String[1]]                           $service        = $logwatch::params::service,
+  String[1]                                  $package_ensure = $logwatch::params::package_ensure,
+  String[1]                                  $package_name   = $logwatch::params::package_name,
+  Stdlib::Unixpath                           $ignore_conf    = $logwatch::params::ignore_conf,
 ) inherits logwatch::params {
+  contain logwatch::install
+  contain logwatch::config
 
-  validate_string($output)
-  validate_string($format)
-  validate_array($mail_to)
-  validate_string($mail_from)
-  validate_re($range, ['^All$', '^Today$', '^Yesterday$'])
-  validate_re($detail, ['^Low$', '^Med$', '^High$'])
-  validate_array($service)
-  validate_string($package_ensure)
-  validate_string($package_name)
-
-  anchor { 'logwatch::begin': }
-  -> class { '::logwatch::install': }
-  -> class { '::logwatch::config': }
-  -> anchor { 'logwatch::end': }
-
+  Class['Logwatch::Install'] -> Class['Logwatch::Config']
 }
