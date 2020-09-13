@@ -20,8 +20,16 @@ describe 'logwatch::config', type: :class do
 
       case os_facts[:osfamily]
       when 'RedHat'
-        it { is_expected.to contain_file('logwatch.conf').with_content(/^Output = unformatted$/) }
+        it { is_expected.to contain_file('logwatch.conf').with_content(%r{^Output = unformatted$}) }
+      else
+        it { is_expected.to contain_file('logwatch.conf').with_content(%r{^Output = stdout$}) }
       end
+      it { is_expected.to contain_file('logwatch.conf').with_content(%r{^Format = text$}) }
+      it { is_expected.to contain_file('logwatch.conf').with_content(%r{^MailTo = root$}) }
+      it { is_expected.to contain_file('logwatch.conf').with_content(%r{^MailFrom = Logwatch$}) }
+      it { is_expected.to contain_file('logwatch.conf').with_content(%r{^Range = Yesterday$}) }
+      it { is_expected.to contain_file('logwatch.conf').with_content(%r{^Detail = Low$}) }
+      it { is_expected.to contain_file('logwatch.conf').with_content(%r{^Service = All$}) }
 
       it do
         is_expected.to contain_concat('ignore.conf').with(

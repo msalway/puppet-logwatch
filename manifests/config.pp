@@ -1,12 +1,5 @@
 #
 class logwatch::config (
-  Enum['stdout','file','mail','unformatted'] $output    = $::logwatch::output,
-  Enum['text','html']                        $format    = $::logwatch::format,
-  Array[String[1]]                           $mail_to   = $::logwatch::mail_to,
-  String[1]                                  $mail_from = $::logwatch::mail_from,
-  Enum['All','Today','Yesterday']            $range     = $::logwatch::range,
-  Enum['Low','Med','High']                   $detail    = $::logwatch::detail,
-  Array[String[1]]                           $service   = $::logwatch::service,
 ) {
 
   file { 'logwatch.conf':
@@ -15,7 +8,17 @@ class logwatch::config (
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => template('logwatch/logwatch.conf.erb'),
+    content => epp('logwatch/logwatch.conf.epp',
+      {
+        'output'    => $::logwatch::output,
+        'format'    => $::logwatch::format,
+        'mail_to'   => $::logwatch::mail_to,
+        'mail_from' => $::logwatch::mail_from,
+        'range'     => $::logwatch::range,
+        'detail'    => $::logwatch::detail,
+        'service'   => $::logwatch::service,
+      }
+    ),
   }
 
   concat { 'ignore.conf':
