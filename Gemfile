@@ -31,6 +31,7 @@ group :development do
   gem "puppet-lint-absolute_classname-check",                      require: false
   gem "puppet-lint-classes_and_types_beginning_with_digits-check", require: false
   gem "puppet-lint-leading_zero-check",                            require: false
+  gem "puppet-lint-param-docs",                                    require: false
   gem "puppet-lint-resource_reference_syntax",                     require: false
   gem "puppet-lint-trailing_comma-check",                          require: false
   gem "puppet-lint-trailing_newline-check",                        require: false

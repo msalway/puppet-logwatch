@@ -1,17 +1,34 @@
-# == Class: logwatch
+# @summary module to install and configure logwatch
 #
-# This class configures Logwatch
+# @param output
+#   The output mode for logwatch
 #
-# Parameters
-# $output
-# $format
-# $mail_to
-# $mail_from
-# $range
-# $detail
-# $service
-# $package_ensure
-# $package_name
+# @param format
+#   The format of the report (text or html)
+#
+# @param mail_to
+#   The list of users/email addresses to sent the report to
+#
+# @param mail_from
+#   What to use in the mail from field
+#
+# @param range
+#   The time range of logs to process
+#
+# @param detail
+#   The level of detail for logwatch to use
+#
+# @param service
+#   The list of services for logwatch to process
+#
+# @param package_ensure
+#   The ensure parameter to pass to the package resource
+#
+# @param package_name
+#   The name of the package to pass to the package resource
+#
+# @param ignore_conf
+#   The path to ignore.conf
 #
 class logwatch (
   Enum['stdout','file','mail','unformatted'] $output,
