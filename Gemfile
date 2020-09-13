@@ -29,12 +29,14 @@ group :development do
   gem "puppet-module-win-default-r#{minor_version}", '~> 0.4',     require: false, platforms: [:mswin, :mingw, :x64_mingw]
   gem "puppet-module-win-dev-r#{minor_version}", '~> 0.4',         require: false, platforms: [:mswin, :mingw, :x64_mingw]
   gem "puppet-lint-absolute_classname-check",                      require: false
-  gem "puppet-lint-leading_zero-check",                            require: false
-  gem "puppet-lint-trailing_comma-check",                          require: false
-  gem "puppet-lint-version_comparison-check",                      require: false
   gem "puppet-lint-classes_and_types_beginning_with_digits-check", require: false
-  gem "puppet-lint-unquoted_string-check",                         require: false
+  gem "puppet-lint-leading_zero-check",                            require: false
   gem "puppet-lint-resource_reference_syntax",                     require: false
+  gem "puppet-lint-trailing_comma-check",                          require: false
+  gem "puppet-lint-trailing_newline-check",                        require: false
+  gem "puppet-lint-unquoted_string-check",                         require: false
+  gem "puppet-lint-variable_contains_upcase",                      require: false
+  gem "puppet-lint-version_comparison-check",                      require: false
 end
 group :system_tests do
   gem "beaker",                       require: false
