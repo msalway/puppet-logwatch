@@ -5,7 +5,6 @@ describe 'logwatch', type: :class do
     context "on #{os}" do
       let(:facts) { os_facts }
 
-      it { is_expected.to contain_class('logwatch::params') }
       it { is_expected.to contain_class('logwatch::install') }
       it { is_expected.to contain_class('logwatch::config') }
     end

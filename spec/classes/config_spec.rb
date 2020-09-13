@@ -4,6 +4,7 @@ describe 'logwatch::config', type: :class do
   on_supported_os.each do |os, os_facts|
     context "on #{os}" do
       let(:facts) { os_facts }
+      let(:pre_condition) { 'include logwatch' }
 
       it { is_expected.to contain_class('logwatch::config') }
 
@@ -15,6 +16,11 @@ describe 'logwatch::config', type: :class do
           'group'  => 'root',
           'mode'   => '0644',
         )
+      end
+
+      case os_facts[:osfamily]
+      when 'RedHat'
+        it { is_expected.to contain_file('logwatch.conf').with_content(/^Output = unformatted$/) }
       end
 
       it do

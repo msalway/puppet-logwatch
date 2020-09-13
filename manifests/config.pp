@@ -1,5 +1,13 @@
 #
-class logwatch::config inherits logwatch {
+class logwatch::config (
+  Enum['stdout','file','mail','unformatted'] $output    = $::logwatch::output,
+  Enum['text','html']                        $format    = $::logwatch::format,
+  Array[String[1]]                           $mail_to   = $::logwatch::mail_to,
+  String[1]                                  $mail_from = $::logwatch::mail_from,
+  Enum['All','Today','Yesterday']            $range     = $::logwatch::range,
+  Enum['Low','Med','High']                   $detail    = $::logwatch::detail,
+  Array[String[1]]                           $service   = $::logwatch::service,
+) {
 
   file { 'logwatch.conf':
     ensure  => file,

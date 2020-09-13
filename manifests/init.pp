@@ -14,17 +14,17 @@
 # $package_name
 #
 class logwatch (
-  Enum['stdout','file','mail','unformatted'] $output         = $logwatch::params::output,
-  Enum['text','html']                        $format         = $logwatch::params::format,
-  Array[String[1]]                           $mail_to        = $logwatch::params::mail_to,
-  String[1]                                  $mail_from      = $logwatch::params::mail_from,
-  Enum['All','Today','Yesterday']            $range          = $logwatch::params::range,
-  Enum['Low','Med','High']                   $detail         = $logwatch::params::detail,
-  Array[String[1]]                           $service        = $logwatch::params::service,
-  String[1]                                  $package_ensure = $logwatch::params::package_ensure,
-  String[1]                                  $package_name   = $logwatch::params::package_name,
-  Stdlib::Unixpath                           $ignore_conf    = $logwatch::params::ignore_conf,
-) inherits logwatch::params {
+  Enum['stdout','file','mail','unformatted'] $output,
+  Enum['text','html']                        $format,
+  Array[String[1]]                           $mail_to,
+  String[1]                                  $mail_from,
+  Enum['All','Today','Yesterday']            $range,
+  Enum['Low','Med','High']                   $detail,
+  Array[String[1]]                           $service,
+  String[1]                                  $package_ensure,
+  String[1]                                  $package_name,
+  Stdlib::Unixpath                           $ignore_conf,
+) {
   contain logwatch::install
   contain logwatch::config
 

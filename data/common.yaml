@@ -1,1 +1,11 @@
---- {}
+---
+logwatch::output: 'stdout'
+logwatch::format: 'text'
+logwatch::mail_to: [ 'root' ]
+logwatch::mail_from: 'Logwatch'
+logwatch::range: 'Yesterday'
+logwatch::detail: 'Low'
+logwatch::service: [ 'All' ]
+logwatch::package_ensure: 'present'
+logwatch::package_name: 'logwatch'
+logwatch::ignore_conf: '/etc/logwatch/conf/ignore.conf'

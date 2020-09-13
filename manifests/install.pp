@@ -1,9 +1,12 @@
 #
-class logwatch::install inherits logwatch {
+class logwatch::install (
+  $package_ensure = $logwatch::package_ensure,
+  $package_name   = $logwatch::package_name,
+) {
 
   package { 'logwatch':
-    ensure => $logwatch::package_ensure,
-    name   => $logwatch::package_name,
+    ensure => $package_ensure,
+    name   => $package_name,
   }
 
 }
