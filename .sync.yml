@@ -1,0 +1,20 @@
+Gemfile:
+  optional:
+    ':development':
+      - gem: 'puppet-lint-absolute_classname-check'
+      - gem: 'puppet-lint-leading_zero-check'
+      - gem: 'puppet-lint-trailing_comma-check'
+      - gem: 'puppet-lint-version_comparison-check'
+      - gem: 'puppet-lint-classes_and_types_beginning_with_digits-check'
+      - gem: 'puppet-lint-unquoted_string-check'
+      - gem: 'puppet-lint-resource_reference_syntax'
+    ':system_tests':
+      - gem: 'beaker'
+      - gem: 'beaker-rspec'
+      - gem: 'beaker-puppet_install_helper'
+
+Rakefile:
+  linter_fail_on_warnings: true
+
+spec/spec_helper.rb:
+  mock_with: ':rspec'
